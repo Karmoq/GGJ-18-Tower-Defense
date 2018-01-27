@@ -12,10 +12,14 @@ public class TileManager : MonoBehaviour {
     [SerializeField] private GameObject StraightPrefab;
     [SerializeField] private GameObject CurvePrefab;
     [SerializeField] private GameObject TPrefab;
+    [SerializeField] private GameObject CleanPrefab;
+
+    [SerializeField] private List<GameObject> l_prefabs = new List<GameObject>();
 
     [SerializeField] private float StraightAmount;
     [SerializeField] private float CurveAmount;
     [SerializeField] private float TAmount;
+    [SerializeField] private float CleanAmount;
 
     [SerializeField] private WorldTile StartTile;
 
@@ -44,21 +48,11 @@ public class TileManager : MonoBehaviour {
     }
 
     public void CreateNewTile(int x, int y)
-    {
-        float randomTogether = StraightAmount + CurveAmount + TAmount;
-        float randomFloat = Random.Range(0, randomTogether);
-        DebugText.text = "" + randomFloat + " - " + randomTogether;
-
+    { 
         //choose a random tile to spawn
         GameObject newTile;
-        if (randomFloat <= StraightAmount / randomTogether)
-            newTile = Instantiate(StraightPrefab);
-        else if (randomFloat <= StraightAmount + CurveAmount / randomTogether)
-            newTile = Instantiate(CurvePrefab);
-        else
-            newTile = Instantiate(TPrefab);
+        newTile = Instantiate(l_prefabs[Random.Range(0, l_prefabs.Count)]);
 
-        //
         l_worldTiles[x, y] = newTile.GetComponent<WorldTile>();
         newTile.GetComponent<WorldTile>().SetPosition(new Vector2Int(x, y));
         newTile.transform.position = new Vector3(x * TileSize.x, 0, y * TileSize.z);

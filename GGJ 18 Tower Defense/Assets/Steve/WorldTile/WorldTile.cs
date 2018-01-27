@@ -7,6 +7,7 @@ public class WorldTile : MonoBehaviour {
     [SerializeField] private Vector2Int position;
 
     public Vector3 goalRotation;
+    public Vector3 goalPosition;
 
     [Range(0,3)] public int currentRotation = 0;
 
@@ -17,6 +18,8 @@ public class WorldTile : MonoBehaviour {
     public WorldTile SouthTile;
     public WorldTile WestTile;
 
+    [SerializeField] private Transform models;
+    public bool selected = false;
     public bool locked = false;
 
     public void Awake()
@@ -33,6 +36,15 @@ public class WorldTile : MonoBehaviour {
         EastTile = TileManager.singleton.GetTileFromPosition(position.x, position.y - 1);
         SouthTile = TileManager.singleton.GetTileFromPosition(position.x - 1, position.y);
         WestTile = TileManager.singleton.GetTileFromPosition(position.x, position.y + 1);
+
+        goalPosition = transform.position;
+    }
+
+    public void Update()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation), 0.1f);
+        
+        models.transform.position = Vector3.Lerp(models.transform.position, goalPosition, 0.1f);
     }
 
     public void TurnRight()
@@ -49,6 +61,7 @@ public class WorldTile : MonoBehaviour {
             t_path.StartPoint = TurnBy(t_path.StartPoint, 1);
             t_path.EndPoint = TurnBy(t_path.EndPoint, 1);
         }
+        goalRotation = new Vector3(0, currentRotation * 90, 0);
     }
 
     public void TurnLeft()
@@ -65,6 +78,8 @@ public class WorldTile : MonoBehaviour {
             t_path.StartPoint = TurnBy(t_path.StartPoint, -1);
             t_path.EndPoint = TurnBy(t_path.EndPoint, -1);
         }
+
+        goalRotation = new Vector3(0, currentRotation * 90, 0);
     }
 
     public void TurnRandom()
@@ -82,6 +97,8 @@ public class WorldTile : MonoBehaviour {
             t_path.StartPoint = TurnBy(t_path.StartPoint, randomTurn);
             t_path.EndPoint = TurnBy(t_path.EndPoint, randomTurn);
         }
+
+        goalRotation = new Vector3(0, currentRotation * 90, 0);
     }
 
     public TilePath GetTilePathByEntryPoint(Rotation t_entryPoint)

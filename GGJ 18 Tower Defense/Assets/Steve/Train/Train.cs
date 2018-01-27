@@ -39,7 +39,7 @@ public class Train : MonoBehaviour {
         else
         {
             WorldTile nextTile = currentTile.GetWorldTileByRotation(currentPath.EndPoint);
-            if (nextTile != null)
+            if (nextTile != null && !nextTile.selected)
             {
                 TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
                 if (nextPath != null)
