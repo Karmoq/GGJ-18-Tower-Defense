@@ -398,7 +398,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -16569000
+  randomSeed: 1663167737
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3900,7 +3900,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.25735295, g: 0.25735295, b: 0.25735295, a: 0.272}
+      maxColor: {r: 0.6985294, g: 0.7139382, b: 0.7139382, a: 0.272}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -7171,7 +7171,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1746891964
+  randomSeed: 1859507513
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -10583,7 +10583,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1707674004
+  randomSeed: -2062276408
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11027,7 +11027,7 @@ ParticleSystem:
     serializedVersion: 5
     enabled: 1
     type: 4
-    angle: 69.43089
+    angle: 52.54863
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -12988,9 +12988,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -13005,7 +13005,7 @@ ParticleSystem:
     m_Dampen:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -13130,7 +13130,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 288
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -14001,7 +14001,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -638930277
+  randomSeed: -1183071606
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16408,7 +16408,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
