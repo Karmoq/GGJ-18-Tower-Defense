@@ -26,7 +26,11 @@ public class AirShipPlayerController : MonoBehaviour {
     public static float WindStrength;
     public static Vector3 WindDirection;
 
-	void Start ()
+    [SerializeField]
+    private float smoothTime = 0.3f;
+    private Vector3 velocity = Vector3.zero;
+
+    void Start ()
     {
         currentTowerNumber = maxTowerNumber;
 	}
@@ -60,7 +64,8 @@ public class AirShipPlayerController : MonoBehaviour {
 
 	void FixedUpdate ()
     {
-        transform.position += movement;
+        //transform.position += movement;
+        transform.position = Vector3.SmoothDamp(transform.position, transform.position + movement, ref velocity, smoothTime);
     }
 
     IEnumerator AddBackTower()
