@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class TileManager : MonoBehaviour {
     public static TileManager singleton;
     public LayerMask tileMask;

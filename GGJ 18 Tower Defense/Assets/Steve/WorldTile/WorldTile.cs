@@ -166,6 +166,18 @@ public class WorldTile : MonoBehaviour {
         return (Rotation)currentRotation;
     }
 
+    public static int CurveDirection(Rotation StartRotation, Rotation EndRotation)
+    {
+        if(StartRotation - EndRotation < -1)
+        {
+            return 1;
+        } else if (StartRotation - EndRotation > 1)
+        {
+            return -1;
+        }
+        return StartRotation - EndRotation;
+    }
+
     public enum Rotation { North, East, South, West }
 
     public enum Type { Straight, Curve, T1, T2, Clean, Start }

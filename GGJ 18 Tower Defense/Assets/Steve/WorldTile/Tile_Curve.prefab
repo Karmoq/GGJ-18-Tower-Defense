@@ -192,8 +192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 114137283221057232}
-  StartPoint: 1
-  EndPoint: 0
+  StartPoint: 0
+  EndPoint: 1
 --- !u!114 &114450792848424570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,5 +206,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 114137283221057232}
-  StartPoint: 0
-  EndPoint: 1
+  StartPoint: 1
+  EndPoint: 0
