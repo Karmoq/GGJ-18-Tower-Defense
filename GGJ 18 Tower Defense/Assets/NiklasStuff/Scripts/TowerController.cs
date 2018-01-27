@@ -25,6 +25,8 @@ public class TowerController : MonoBehaviour {
 
     [SerializeField]
     private Transform towerTransform;
+    [SerializeField]
+    private GameObject cannonParticle;
 
     void Start()
     {
@@ -72,6 +74,7 @@ public class TowerController : MonoBehaviour {
                 GameObject bulletObject = Instantiate(bulletPrefab,firePos.position,firePos.rotation);
                 Bullet bullet = bulletObject.GetComponent<Bullet>();
                 bullet.Setup(currentTarget);
+                GameObject particleObject = Instantiate(cannonParticle, firePos.position, firePos.rotation);
 
                 currentReload = fireRate;
             }
@@ -88,6 +91,11 @@ public class TowerController : MonoBehaviour {
     public void SetTowerLifeTime(float newLifeTime)
     {
         towerLifeTime = newLifeTime;
+    }
+
+    public Transform GetTarget()
+    {
+        return currentTarget;
     }
 
 }

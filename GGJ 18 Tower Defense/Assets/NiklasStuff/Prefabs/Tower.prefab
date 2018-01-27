@@ -101,6 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4423392286508344}
   - component: {fileID: 114195013475183480}
+  - component: {fileID: 114712723927869184}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -156,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1171029385003100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.57}
+  m_LocalPosition: {x: 0, y: 0, z: 0.599}
   m_LocalScale: {x: 0.5118334, y: 0.5118334, z: 0.5118334}
   m_Children: []
   m_Father: {fileID: 4694439875769564}
@@ -214,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1529008758332428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.751}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4694439875769564}
@@ -320,6 +321,8 @@ MonoBehaviour:
   fireRate: 1
   lerpSpeed: 0.01
   towerTransform: {fileID: 4863550343651100}
+  cannonParticle: {fileID: 1500011406863694, guid: 8d97fc689daac34458590450f8271cb7,
+    type: 2}
 --- !u!114 &114569255173270008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,6 +338,18 @@ MonoBehaviour:
   endPos: {fileID: 4863550343651100}
   divisions: 10
   runTimeGenerate: 1
+--- !u!114 &114712723927869184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1595290873463090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c0fb64d96eaed449655cbcdef11b00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cannon: {fileID: 4694439875769564}
 --- !u!120 &120340412126310996
 LineRenderer:
   m_ObjectHideFlags: 1
