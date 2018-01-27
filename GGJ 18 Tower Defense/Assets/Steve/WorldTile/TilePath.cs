@@ -9,15 +9,13 @@ public class TilePath : MonoBehaviour
     public WorldTile.Rotation StartPoint;
     public WorldTile.Rotation EndPoint;
 
-
-
     public Vector3[] GetPath()
     {
         Vector3 startPosition = tile.GetPositionOfDirection(StartPoint);
         Vector3 endPosition = tile.GetPositionOfDirection(EndPoint);
         float distance = Vector3.Distance(startPosition, endPosition);
         List<Vector3> pathPoints = new List<Vector3>();
-        for(float x = 0; x < distance; x+= 0.05f)
+        for(float x = 0; x < distance; x += 1/TileManager.singleton.PathIncrements)
         {
             pathPoints.Add(Vector3.Lerp(startPosition, endPosition, x / distance));
         }

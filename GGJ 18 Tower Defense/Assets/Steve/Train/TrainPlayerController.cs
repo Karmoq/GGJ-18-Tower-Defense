@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TrainPlayerController : MonoBehaviour {
     [SerializeField] private WorldTile selectedTile;
     [SerializeField] private bool moved = false;
     [SerializeField] private bool turned = false;
+    public Text DebugText;
 
     public void Start()
     {
@@ -16,14 +18,15 @@ public class TrainPlayerController : MonoBehaviour {
     {
         float x = Input.GetAxis("Joystick1Axis1");
         float y = Input.GetAxis("Joystick1Axis2");
-
-        if (x > 0.5f)
+        DebugText.text = "" + x + " - "+y;
+        float threshhold = 0.2f;
+        if (x > threshhold && y < -threshhold)
             Move(WorldTile.Rotation.North);
-        else if (x < -0.5f)
+        else if (x < -threshhold && y > threshhold)
             Move(WorldTile.Rotation.South);
-        else if (y > 0.5f)
+        else if (x > threshhold && y > threshhold)
             Move(WorldTile.Rotation.East);
-        else if (y < -0.5f)
+        else if (x < -threshhold && y < -threshhold)
             Move(WorldTile.Rotation.West);
         else
             moved = false;

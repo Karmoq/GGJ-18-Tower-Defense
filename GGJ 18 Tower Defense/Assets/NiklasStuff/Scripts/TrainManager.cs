@@ -14,7 +14,6 @@ public class TrainManager : MonoBehaviour {
             return targets;
         }
     }
-        
 
 
     void Awake()

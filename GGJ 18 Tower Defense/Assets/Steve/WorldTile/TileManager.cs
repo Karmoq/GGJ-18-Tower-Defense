@@ -9,18 +9,10 @@ public class TileManager : MonoBehaviour {
     
     //Tile Settings
     public Vector3 TileSize;
-    [SerializeField] private GameObject StraightPrefab;
-    [SerializeField] private GameObject CurvePrefab;
-    [SerializeField] private GameObject TPrefab;
-    [SerializeField] private GameObject CleanPrefab;
+    public float PathIncrements;
 
     [SerializeField] private List<GameObject> l_prefabs = new List<GameObject>();
-
-    [SerializeField] private float StraightAmount;
-    [SerializeField] private float CurveAmount;
-    [SerializeField] private float TAmount;
-    [SerializeField] private float CleanAmount;
-
+    [SerializeField] private List<GameObject> l_groundPrefabs = new List<GameObject>();
     [SerializeField] private WorldTile StartTile;
 
     // grid
@@ -47,19 +39,49 @@ public class TileManager : MonoBehaviour {
         StartTile.NorthTile = l_worldTiles[0, 0];
     }
 
-    public void CreateNewTile(int x, int y)
-    { 
+    public WorldTile CreateNewTile(int x, int y)
+    {
         //choose a random tile to spawn
         GameObject newTile;
         newTile = Instantiate(l_prefabs[Random.Range(0, l_prefabs.Count)]);
 
-        l_worldTiles[x, y] = newTile.GetComponent<WorldTile>();
-        newTile.GetComponent<WorldTile>().SetPosition(new Vector2Int(x, y));
+        WorldTile newTileScript = newTile.GetComponent<WorldTile>();
+        l_worldTiles[x, y] = newTileScript;
+        newTileScript.SetPosition(new Vector2Int(x, y));
+        
+        GameObject groundTile = Instantiate(l_groundPrefabs[Random.Range(0, l_groundPrefabs.Count)]);
+        groundTile.transform.position += Vector3.down * 0.05f;
+        groundTile.transform.SetParent(newTileScript.models);
+
+        newTileScript.TurnRandom();
+
         newTile.transform.position = new Vector3(x * TileSize.x, 0, y * TileSize.z);
         newTile.transform.localScale = TileSize;
         newTile.name += " = " + x + " - " + y;
 
-        newTile.GetComponent<WorldTile>().TurnRandom();
+        return newTileScript;
+    }
+    public WorldTile CreateNewTile(int x, int y, WorldTile.Type type)
+    {
+        //choose a random tile to spawn
+        GameObject newTile;
+        newTile = Instantiate(l_prefabs[Random.Range(0, l_prefabs.Count)]);
+
+        WorldTile newTileScript = newTile.GetComponent<WorldTile>();
+        l_worldTiles[x, y] = newTileScript;
+        newTileScript.SetPosition(new Vector2Int(x, y));
+
+        GameObject groundTile = Instantiate(l_groundPrefabs[Random.Range(0, l_groundPrefabs.Count)]);
+        groundTile.transform.position += Vector3.down * 0.05f;
+        groundTile.transform.SetParent(newTileScript.models);
+
+        newTileScript.TurnRandom();
+
+        newTile.transform.position = new Vector3(x * TileSize.x, 0, y * TileSize.z);
+        newTile.transform.localScale = TileSize;
+        newTile.name += " = " + x + " - " + y;
+
+        return newTileScript;
     }
 
     public WorldTile GetTileFromPosition(int x, int y)
@@ -73,6 +95,18 @@ public class TileManager : MonoBehaviour {
             return null;
         return l_worldTiles[x, y];
     }
+
+    //public WorldTile[] CreateGuaranteedPath(WorldTile[] l_worldTiles, Vector2Int StartPosition, Vector2Int EndPosition)
+    //{
+    //    WorldTile currentTile = CreateNewTile(StartPosition.x, StartPosition.y);
+    //    Vector2 direction = EndPosition - currentTile.GetPosition();
+    //    Debug.Log(direction);
+    //    while (currentTile.GetPosition() != EndPosition)
+    //    {
+    //
+    //    }
+    //        
+    //}
 
     public void Update()
     {

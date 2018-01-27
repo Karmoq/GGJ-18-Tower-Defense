@@ -18,7 +18,7 @@ public class WorldTile : MonoBehaviour {
     public WorldTile SouthTile;
     public WorldTile WestTile;
 
-    [SerializeField] private Transform models;
+    [SerializeField] public Transform models;
     public bool selected = false;
     public bool locked = false;
 
@@ -154,4 +154,6 @@ public class WorldTile : MonoBehaviour {
     }
 
     public enum Rotation { North, East, South, West }
+
+    public enum Type { Straight, Curve, T }
 }

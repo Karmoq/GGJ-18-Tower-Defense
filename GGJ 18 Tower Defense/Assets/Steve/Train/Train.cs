@@ -30,11 +30,12 @@ public class Train : MonoBehaviour {
     {
         if(pointIndex < currentPathPoints.Length)
         {
-            if (Vector3.Distance(currentPathPoints[pointIndex], transform.position) > 0.05f) // move into the direction of the next point
+            if (Vector3.Distance(currentPathPoints[pointIndex], transform.position) > currentSpeed * Time.deltaTime) // move into the direction of the next point
             {
                 Vector3 velocity = currentPathPoints[pointIndex] - transform.position;
                 currentSpeed = Mathf.Clamp(currentSpeed + 0.1f * Time.deltaTime, 0, targetSpeed);
                 transform.position += Vector3.ClampMagnitude(velocity, currentSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.LookRotation(currentPathPoints[pointIndex] - transform.position);
             }
             else
             {// load the next point
