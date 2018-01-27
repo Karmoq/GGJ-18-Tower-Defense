@@ -14,8 +14,8 @@ public class TrainPlayerController : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        float x = Input.GetAxis("Joystick1Axis1");
-        float y = -Input.GetAxis("Joystick1Axis2");
+        float y = Input.GetAxis("Joystick1Axis1");
+        float x = Input.GetAxis("Joystick1Axis2");
 
         if (y > 0.5f)
             Move(WorldTile.Rotation.North);
