@@ -30,6 +30,15 @@ public class AirShipPlayerController : MonoBehaviour {
     private float smoothTime = 0.3f;
     private Vector3 velocity = Vector3.zero;
 
+    [SerializeField]
+    private Rect movementRect;
+
+    [SerializeField]
+    private Vector3 TowerSpawnOffset = Vector3.zero;
+
+    [SerializeField]
+    private bool placedTower = true;
+
     void Start ()
     {
         currentTowerNumber = maxTowerNumber;
@@ -44,16 +53,21 @@ public class AirShipPlayerController : MonoBehaviour {
 
         movement = Quaternion.Euler(0, 45, 0) * new Vector3(xIn, 0, -yIn);
 
-        if(Input.GetKeyDown(KeyCode.Joystick2Button0))
+        if(Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetAxis("Joystick2Axis3") != 0)
         {
-            if (currentTowerNumber > 0)
+            if (currentTowerNumber > 0 && !placedTower)
             {
                 GameObject tower = Instantiate(towerPrefab, transform.position, Quaternion.Euler(0, 0, 0));
                 TowerController tc = tower.GetComponent<TowerController>();
                 tc.SetTowerLifeTime(towerLifeTime);
                 currentTowerNumber--;
                 StartCoroutine(AddBackTower());
+                placedTower = true;
             }
+        }
+        else
+        {
+            placedTower = false;
         }
 
         float xIn2 = Input.GetAxis("Joystick2Axis4") * moveSpeed;
@@ -65,12 +79,36 @@ public class AirShipPlayerController : MonoBehaviour {
 	void FixedUpdate ()
     {
         //transform.position += movement;
-        transform.position = Vector3.SmoothDamp(transform.position, transform.position + movement, ref velocity, smoothTime);
+        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, transform.position + movement, ref velocity, smoothTime);
+
+        if (transform.position.x > movementRect.x + movementRect.width)
+        {
+            targetPosition.x = movementRect.x + movementRect.width;
+        }
+        if (transform.position.x < movementRect.x)
+        {
+            targetPosition.x = movementRect.x;
+        }
+        if (transform.position.z > movementRect.y + movementRect.height)
+        {
+            targetPosition.z = movementRect.y + movementRect.height;
+        }
+        if (transform.position.z < movementRect.y)
+        {
+            targetPosition.z = movementRect.y;
+        }
+        transform.position = targetPosition;
     }
 
     IEnumerator AddBackTower()
     {
         yield return new WaitForSeconds(towerLifeTime + towerBetweenTime);
         currentTowerNumber++;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(new Vector3(movementRect.x+ movementRect.width/2, 5, movementRect.y+ movementRect.height/2), new Vector3(movementRect.width, 0, movementRect.height));
     }
 }

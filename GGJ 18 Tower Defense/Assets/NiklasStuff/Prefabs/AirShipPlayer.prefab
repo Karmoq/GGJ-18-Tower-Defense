@@ -142,7 +142,13 @@ MonoBehaviour:
   towerPrefab: {fileID: 1595290873463090, guid: 0a2038c435290b9409cfd2127266809a,
     type: 2}
   maxTowerNumber: 5
-  towerLifeTime: 10
+  towerLifeTime: 30
   towerBetweenTime: 5
   windStrength: 3
   smoothTime: 0.1
+  movementRect:
+    serializedVersion: 2
+    x: -0.5
+    y: -0.5
+    width: 21
+    height: 21

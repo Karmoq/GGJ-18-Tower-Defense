@@ -31,10 +31,16 @@ public class TowerController : MonoBehaviour {
 
     private Animator anim;
 
+    private AudioController acFire;
+
+    [SerializeField]
+    private GameObject flyAway;
+
     void Start()
     {
         anchorPosition = transform.position;
         anim = GetComponent<Animator>();
+        acFire = GetComponent<AudioController>();
     }
 
 	void Update ()
@@ -80,6 +86,8 @@ public class TowerController : MonoBehaviour {
                 bullet.Setup(currentTarget);
                 GameObject particleObject = Instantiate(cannonParticle, firePos.position, firePos.rotation);
 
+                acFire.Play();
+
                 currentReload = fireRate;
             }
         }
@@ -104,6 +112,7 @@ public class TowerController : MonoBehaviour {
 
     void Die()
     {
+        Instantiate(flyAway, transform.position, transform.rotation);
         anim.SetTrigger("Die");
         Destroy(gameObject, 1);
     }
