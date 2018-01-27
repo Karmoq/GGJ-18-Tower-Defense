@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class Train : MonoBehaviour {
     //Train Stats
-    [SerializeField] private float Speed;
+    [SerializeField] private float targetSpeed;
+    [SerializeField] public float currentSpeed;
+    [SerializeField] public List<TrainWagon> l_wagons = new List<TrainWagon>();
 
     // Pathing stuff
     [SerializeField] private WorldTile StartTile;
@@ -24,17 +26,24 @@ public class Train : MonoBehaviour {
         pointIndex = 0;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         if(pointIndex < currentPathPoints.Length)
         {
             if (Vector3.Distance(currentPathPoints[pointIndex], transform.position) > 0.05f) // move into the direction of the next point
             {
                 Vector3 velocity = currentPathPoints[pointIndex] - transform.position;
-                transform.position += Vector3.ClampMagnitude(velocity, Speed * Time.deltaTime);
+                currentSpeed = Mathf.Clamp(currentSpeed + 0.1f * Time.deltaTime, 0, targetSpeed);
+                transform.position += Vector3.ClampMagnitude(velocity, currentSpeed * Time.deltaTime);
             }
-            else // load the next point
+            else
+            {// load the next point
+                foreach(TrainWagon t_wagon in l_wagons)
+                {
+                    t_wagon.TrainPath.Add(currentPathPoints[pointIndex]);
+                }
                 pointIndex++;
+            }
         }
         else
         {
@@ -52,8 +61,13 @@ public class Train : MonoBehaviour {
                     currentTile.locked = true;
                 }
             }
+            else
+            {
+                currentSpeed = 0;
+            }
         }
     }
+
 
 
     public enum State { Driving, WaitingForNextTile }

@@ -1,54 +1,17 @@
 fileFormatVersion: 2
-guid: b7f84c9541cdcf74dbd76acf2d314afb
-timeCreated: 1517015558
+guid: 7832548cce1b9784fb55e652c77fabcf
+timeCreated: 1517024724
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: pCube40
-    100002: pCube41
-    100004: pCube42
-    100006: pCube43
-    100008: pCube44
-    100010: pCube45
-    100012: pCube46
-    100014: pCube47
-    100016: //RootNode
-    400000: pCube40
-    400002: pCube41
-    400004: pCube42
-    400006: pCube43
-    400008: pCube44
-    400010: pCube45
-    400012: pCube46
-    400014: pCube47
-    400016: //RootNode
+    100000: //RootNode
+    400000: //RootNode
     2100000: lambert1
     2100002: lambert5
-    2300000: pCube40
-    2300002: pCube41
-    2300004: pCube42
-    2300006: pCube43
-    2300008: pCube44
-    2300010: pCube45
-    2300012: pCube46
-    2300014: pCube47
-    3300000: pCube40
-    3300002: pCube41
-    3300004: pCube42
-    3300006: pCube43
-    3300008: pCube44
-    3300010: pCube45
-    3300012: pCube46
-    3300014: pCube47
-    4300000: pCube41
-    4300002: pCube42
-    4300004: pCube43
-    4300006: pCube44
-    4300008: pCube47
-    4300010: pCube46
-    4300012: pCube45
-    4300014: pCube40
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Gerade_Schiene
     9500000: //RootNode
   externalObjects: {}
   materials:

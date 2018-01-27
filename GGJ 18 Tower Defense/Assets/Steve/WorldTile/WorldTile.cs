@@ -42,9 +42,9 @@ public class WorldTile : MonoBehaviour {
 
     public void Update()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation), 0.1f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation), 0.25f);
         
-        models.transform.position = Vector3.Lerp(models.transform.position, goalPosition, 0.1f);
+        models.transform.position = Vector3.Lerp(models.transform.position, goalPosition, 0.25f);
     }
 
     public void TurnRight()

@@ -17,20 +17,12 @@ public class TilePath : MonoBehaviour
         Vector3 endPosition = tile.GetPositionOfDirection(EndPoint);
         float distance = Vector3.Distance(startPosition, endPosition);
         List<Vector3> pathPoints = new List<Vector3>();
-        for(float x = 0; x < distance; x+= 0.1f)
+        for(float x = 0; x < distance; x+= 0.05f)
         {
             pathPoints.Add(Vector3.Lerp(startPosition, endPosition, x / distance));
         }
         return pathPoints.ToArray();
     }
 
-    public void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(tile.GetPositionOfDirection(StartPoint), tile.GetPositionOfDirection(EndPoint));
-        foreach(Vector3 t_pos in GetPath())
-        {
-            Gizmos.DrawSphere(t_pos, 0.02f);
-        }
-    }
+    
 }
