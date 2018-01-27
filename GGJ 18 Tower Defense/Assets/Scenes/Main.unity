@@ -575,6 +575,36 @@ Prefab:
       propertyPath: m_Name
       value: AirShipPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: towerLifeTime
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: towerBetweenTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: movementRect.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: movementRect.width
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: movementRect.height
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114881851875152476, guid: 00b5baf0cc3bbf147bd40e39db90bf9e,
+        type: 2}
+      propertyPath: maxTowerNumber
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 00b5baf0cc3bbf147bd40e39db90bf9e, type: 2}
   m_IsPrefabParent: 0
@@ -926,9 +956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efcf870bde6bb9418f9600487cef234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMask:
-    serializedVersion: 2
-    m_Bits: 256
   TileSize: {x: 1, y: 1, z: 1}
   PathIncrements: 20
   l_prefabs:
@@ -945,8 +972,14 @@ MonoBehaviour:
   - {fileID: 100000, guid: d8832bdf391df7a41b32702baf0c27e0, type: 3}
   - {fileID: 100000, guid: 9b0a1130f034a70458d75ef9bf324d84, type: 3}
   - {fileID: 100000, guid: 60feb6ee9b01c254192e19b2e75d5a51, type: 3}
+  l_randomPrefabs: []
   StartTile: {fileID: 0}
-  gridSize: {x: 20, y: 20}
+  StraightAmount: 5
+  CurveAmount: 5
+  T1Amount: 3
+  T2Amount: 3
+  CleanAmount: 0.5
+  gridSize: {x: 15, y: 15}
   DebugText: {fileID: 1611300757}
 --- !u!4 &1958108852
 Transform:
@@ -975,14 +1008,18 @@ MonoBehaviour:
   selectedTile: {fileID: 0}
   moved: 0
   turned: 0
-  nextTrainCooldown: 30
-  nextTrainTimer: 30
+  tileMask:
+    serializedVersion: 2
+    m_Bits: 256
+  nextTrainCooldown: 20
+  nextTrainTimer: 20
   TrainPrefab: {fileID: 1489030144110822, guid: acb8153a180cfce4c98d844e2a5aa327,
     type: 2}
   CoalWagonPrefab: {fileID: 1850729745129604, guid: 5722338fe2820d04f93a755b8769a088,
     type: 2}
   WagonPrefab: {fileID: 1007894255004314, guid: c2439e4172c903f44a8973c2cb297ba1,
     type: 2}
+  wagons: 3
 --- !u!114 &1958108854
 MonoBehaviour:
   m_ObjectHideFlags: 0

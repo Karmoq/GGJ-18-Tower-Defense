@@ -30,7 +30,7 @@ public class TrainHealth : MonoBehaviour {
     {
         if (explosionObject != null)
         {
-            Instantiate(explosionObject, transform.position, Quaternion.Euler(0, 0, 0));
+            Instantiate(explosionObject, transform.position, explosionObject.transform.rotation);
         }
         TrainManager.S.RemoveTarget(transform);
         Destroy(gameObject);

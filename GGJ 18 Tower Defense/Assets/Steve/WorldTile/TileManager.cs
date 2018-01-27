@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class TileManager : MonoBehaviour {
     public static TileManager singleton;
-    public LayerMask tileMask;
     
     //Tile Settings
     public Vector3 TileSize;
@@ -14,7 +13,14 @@ public class TileManager : MonoBehaviour {
     //random tiles
     [SerializeField] private List<GameObject> l_prefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> l_groundPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> l_randomPrefabs = new List<GameObject>();
     [SerializeField] public WorldTile StartTile;
+
+    public float StraightAmount;
+    public float CurveAmount;
+    public float T1Amount;
+    public float T2Amount;
+    public float CleanAmount;
 
     // grid
     public Vector2Int gridSize;
@@ -27,7 +33,8 @@ public class TileManager : MonoBehaviour {
         singleton = this;
         l_worldTiles = new WorldTile[gridSize.x + 1, gridSize.y + 1];
         StartTile = CreateTileOfType(-1, gridSize.y / 2, WorldTile.Type.Start, false);
-        CreateGuaranteedPath(l_worldTiles, new Vector2Int(0, gridSize.y / 2), new Vector2Int(gridSize.x, gridSize.y / 2));
+        CreateGuaranteedPath(l_worldTiles, new Vector2Int(0, gridSize.y / 2), new Vector2Int(gridSize.x, (int)(gridSize.y * 0.25f)));
+        CreateGuaranteedPath(l_worldTiles, new Vector2Int(0, gridSize.y / 2), new Vector2Int(gridSize.x, (int)(gridSize.y * 0.75f)));
         //fill the empty slots
         for (int x = 0; x <= gridSize.x; x++)
         {
@@ -45,24 +52,21 @@ public class TileManager : MonoBehaviour {
     public WorldTile CreateRandomTile(int x, int y)
     {
         //choose a random tile to spawn
-        GameObject newTile;
-        newTile = Instantiate(l_prefabs[Random.Range(0, l_prefabs.Count)]);
-
-        WorldTile newTileScript = newTile.GetComponent<WorldTile>();
-        l_worldTiles[x, y] = newTileScript;
-        newTileScript.SetPosition(new Vector2Int(x, y));
+        float random = Random.Range(0, StraightAmount + CurveAmount + T1Amount + T2Amount + CleanAmount);
+        WorldTile.Type tileType;
+        if (random < StraightAmount)
+            tileType = WorldTile.Type.Straight;
+        else if (random < StraightAmount + CurveAmount)
+            tileType = WorldTile.Type.Curve;
+        else if (random < StraightAmount + CurveAmount + T1Amount)
+            tileType = WorldTile.Type.T1;
+        else if (random < StraightAmount + CurveAmount + T1Amount+ T2Amount)
+            tileType = WorldTile.Type.T2;
+        else
+            tileType = WorldTile.Type.Clean;
         
-        GameObject groundTile = Instantiate(l_groundPrefabs[Random.Range(0, l_groundPrefabs.Count)]);
-        groundTile.transform.position += Vector3.down * 0.05f;
-        groundTile.transform.SetParent(newTileScript.models);
 
-        newTileScript.TurnRandom();
-
-        newTile.transform.position = new Vector3(x * TileSize.x, 0, y * TileSize.z);
-        newTile.transform.localScale = TileSize;
-        newTile.name += " = " + x + " - " + y;
-
-        return newTileScript;
+        return CreateTileOfType(x, y, tileType, true);
     }
 
     public WorldTile CreateTileOfType(int x, int y, WorldTile.Type type, bool turnRandom)
@@ -103,7 +107,7 @@ public class TileManager : MonoBehaviour {
     //Create a guaranteed path so the train player has the possibility to reach the target
     public WorldTile[,] CreateGuaranteedPath(WorldTile[,] l_worldTiles, Vector2Int StartPosition, Vector2Int EndPosition)
     {
-        WorldTile.Rotation lastRotation;
+        WorldTile.Rotation lastRotation = WorldTile.Rotation.North;
         Vector2Int currentPosition = StartPosition;
         Vector2 direction = EndPosition - StartPosition;
         WorldTile.Rotation currentRotation =  GetRotationFromDirection(direction);
@@ -111,17 +115,30 @@ public class TileManager : MonoBehaviour {
         float randomFactor = 0.5f;
         while(currentPosition != EndPosition)
         {
+            bool allowRandomizer = false;
+            if(lastRotation == currentRotation)
+            {
+                allowRandomizer = true;
+            }
             lastRotation = currentRotation;
             direction = EndPosition - currentPosition;
             currentRotation = GetRotationFromDirection(direction);
             //Randomize the rotation a bit
-            if(Random.Range(0,1f) > randomFactor && !isEdgePosition(currentPosition)) // randomize and check if it is not an edge tile
+            if (allowRandomizer)
             {
-                currentRotation = WorldTile.TurnBy(currentRotation, Random.Range(-1, 2));
-                randomFactor = 0;
-            } else
-            {
-                randomFactor += 0.05f;
+                if (Random.Range(0, 1f) < randomFactor && !isEdgePosition(currentPosition)) // randomize and check if it is not an edge tile
+                {
+                    WorldTile.Rotation randomRotation = WorldTile.TurnBy(currentRotation, Random.Range(-1, 2));
+                    if ((randomRotation - currentRotation) % 2 == 1)
+                    {
+                        currentRotation = WorldTile.TurnBy(currentRotation, Random.Range(-1, 2));
+                        randomFactor = -0.1f;
+                    }
+                }
+                else
+                {
+                    randomFactor += 0.5f;
+                }
             }
 
             // spawn the tile
@@ -181,15 +198,6 @@ public class TileManager : MonoBehaviour {
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = FindObjectOfType<Camera>().ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo = new RaycastHit();
-            if(Physics.Raycast(ray, out hitInfo, 500, tileMask))
-            {
-                hitInfo.collider.GetComponent<WorldTile>().TurnRight();
-                Debug.Log("Turned " + hitInfo.collider.name);
-            }
-        }
+        
     }
 }

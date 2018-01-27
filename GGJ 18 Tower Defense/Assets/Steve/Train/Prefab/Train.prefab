@@ -1369,8 +1369,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed51377091b45e42a9cd4895476e9d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetSpeed: 1
+  targetSpeed: 3
   currentSpeed: 0
+  acceleration: 1
   l_wagons: []
   c_animator: {fileID: 0}
   StartTile: {fileID: 0}
@@ -1378,6 +1379,8 @@ MonoBehaviour:
   currentPath: {fileID: 0}
   currentPathPoints: []
   pointIndex: 0
+  distanceToNextPoint: 0
+  pathForWagons: []
   DebugText: {fileID: 0}
 --- !u!114 &114948246144194690
 MonoBehaviour:
@@ -1390,7 +1393,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74495d8348802c7428144c0f03733ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  MaxHealth: 150
+  explosionObject: {fileID: 1628981110497624, guid: d39b5027be74e4c4c97ad17149ab1ee8,
+    type: 2}
 --- !u!198 &198544210668026350
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -6,8 +6,7 @@ public class TrainWagon : MonoBehaviour {
 
     public Train train;
 
-    public List<Vector3> TrainPath = new List<Vector3>();
-    public float offset = 0;
+    public float offsetDistance = 0;
 
     public WorldTile currentTile;
 
@@ -15,19 +14,13 @@ public class TrainWagon : MonoBehaviour {
 
     public void Update()
     {
-        if (TrainPath.Count > (int)(offset*TileManager.singleton.PathIncrements))
+        transform.position = train.GetPathPositionByOffset(offsetDistance);
+        if(transform.position == Vector3.zero)
         {
-            if (Vector3.Distance(TrainPath[0], transform.position) > 0.05f)
-            {
-                Vector3 velocity = TrainPath[0] - transform.position;
-                transform.position += Vector3.ClampMagnitude(velocity, train.currentSpeed * Time.deltaTime);
-                transform.rotation = Quaternion.LookRotation(TrainPath[0] - transform.position);
-            }
-            else
-            {
-                TrainPath.RemoveAt(0);
-            }
+            transform.position = TileManager.singleton.StartTile.transform.position;
         }
+        if(train.GetPathPositionByOffset(offsetDistance - 0.1f) - transform.position != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(train.GetPathPositionByOffset(offsetDistance - 0.1f) - transform.position);
 
         Ray ray = new Ray(transform.position + Vector3.up * 1, Vector3.down);
         RaycastHit hitInfo = new RaycastHit();
@@ -46,5 +39,12 @@ public class TrainWagon : MonoBehaviour {
                 currentTile.locked = false;
             currentTile = null;
         }
+    }
+
+    public void Destroy()
+    {
+        if (currentTile != null)
+            currentTile.locked = false;
+        Destroy(gameObject);
     }
 }

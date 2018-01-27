@@ -155,6 +155,8 @@ public class WorldTile : MonoBehaviour {
     public Vector2Int GetPosition() { return position; }
     public void SetPosition(Vector2Int t_pos) { position = t_pos; }
 
+    public void ResetGoalPosition() { goalPosition = transform.position; }
+
     public static Rotation TurnBy(Rotation current, int value)
     {
         int currentRotation = (int)current;

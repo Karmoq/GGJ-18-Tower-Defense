@@ -47,7 +47,7 @@ public class TilePath : MonoBehaviour
                     point = new Vector3(y * rotation, -x);
                 }
                 point += (Vector2)WorldTile.GetVector2IntFromRotation(StartPoint) * 0.5f + (Vector2)WorldTile.GetVector2IntFromRotation(EndPoint) * 0.5f;
-                pathPoints.Add(new Vector3(point.x, 0, point.y));
+                pathPoints.Add(new Vector3(point.x, startPosition.y, point.y)+transform.position);
             }
         }
         return pathPoints.ToArray();
