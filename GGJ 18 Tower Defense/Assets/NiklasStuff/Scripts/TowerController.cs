@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class TowerController : MonoBehaviour {
 
     private Transform currentTarget;
@@ -28,9 +29,12 @@ public class TowerController : MonoBehaviour {
     [SerializeField]
     private GameObject cannonParticle;
 
+    private Animator anim;
+
     void Start()
     {
         anchorPosition = transform.position;
+        anim = GetComponent<Animator>();
     }
 
 	void Update ()
@@ -39,7 +43,7 @@ public class TowerController : MonoBehaviour {
 
         if(towerLifeTime <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
 
         float distance = 99999;
@@ -50,7 +54,7 @@ public class TowerController : MonoBehaviour {
             //Find closest target in range
             Vector3 targetPosition = targetList[i].position;
             targetPosition.y = 0;
-            Vector3 towerPosition = transform.position;
+            Vector3 towerPosition = towerTransform.position;
             towerPosition.y = 0;
 
             float targetDistance = Vector3.Distance(targetPosition, towerPosition);
@@ -98,4 +102,9 @@ public class TowerController : MonoBehaviour {
         return currentTarget;
     }
 
+    void Die()
+    {
+        anim.SetTrigger("Die");
+        Destroy(gameObject, 1);
+    }
 }

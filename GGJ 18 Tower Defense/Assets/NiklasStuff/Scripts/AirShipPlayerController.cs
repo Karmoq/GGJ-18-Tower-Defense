@@ -42,7 +42,7 @@ public class AirShipPlayerController : MonoBehaviour {
         float xIn = Input.GetAxis("Joystick2Axis1") * moveSpeed;
         float yIn = Input.GetAxis("Joystick2Axis2") * moveSpeed;
 
-        movement = new Vector3(xIn, 0, -yIn);
+        movement = Quaternion.Euler(0, 45, 0) * new Vector3(xIn, 0, -yIn);
 
         if(Input.GetKeyDown(KeyCode.Joystick2Button0))
         {
@@ -59,7 +59,7 @@ public class AirShipPlayerController : MonoBehaviour {
         float xIn2 = Input.GetAxis("Joystick2Axis4") * moveSpeed;
         float yIn2 = Input.GetAxis("Joystick2Axis5") * moveSpeed;
 
-        WindDirection = new Vector3(xIn2, 0, -yIn2);
+        WindDirection = Quaternion.Euler(0, 45, 0) * new Vector3(xIn2, 0, -yIn2);
     }
 
 	void FixedUpdate ()
