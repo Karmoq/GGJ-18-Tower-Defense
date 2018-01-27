@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour {
     private float speed;
     public float damage = 10;
 
+    private float destroyAfterTime = 20;
+
     public void Setup(Transform newTarget)
     {
         homeTarget = newTarget;
@@ -16,8 +18,8 @@ public class Bullet : MonoBehaviour {
 
     void Update()
     {
-
-        if(homeTarget == null)
+        destroyAfterTime -= Time.deltaTime;
+        if(homeTarget == null || destroyAfterTime < 0)
         {
             Destroy(gameObject);
         }

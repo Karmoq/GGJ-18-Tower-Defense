@@ -8,6 +8,9 @@ public class TrainHealth : MonoBehaviour {
     private float MaxHealth = 100;
     private float currentHealth;
 
+    [SerializeField]
+    private GameObject explosionObject;
+
     void Start()
     {
         currentHealth = MaxHealth;
@@ -25,6 +28,10 @@ public class TrainHealth : MonoBehaviour {
 
     public void Die()
     {
+        if (explosionObject != null)
+        {
+            Instantiate(explosionObject, transform.position, Quaternion.Euler(0, 0, 0));
+        }
         TrainManager.S.RemoveTarget(transform);
         Destroy(gameObject);
     }
@@ -37,6 +44,11 @@ public class TrainHealth : MonoBehaviour {
             TakeDamage(bullet.damage);
             Destroy(col.gameObject);
         }
+    }
+
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
 }

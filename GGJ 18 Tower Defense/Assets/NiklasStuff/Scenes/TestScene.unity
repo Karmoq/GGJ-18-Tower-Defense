@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  explosionObject: {fileID: 0}
 --- !u!23 &608459616
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -382,6 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  explosionObject: {fileID: 0}
 --- !u!54 &623209262
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -838,50 +840,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 1912117031780148, guid: d39b5027be74e4c4c97ad17149ab1ee8, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198842946855769026, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198842946855769026, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: randomSeed
-      value: 45277682
-      objectReference: {fileID: 0}
-    - target: {fileID: 198814592658758310, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198814592658758310, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: randomSeed
-      value: -60508743
-      objectReference: {fileID: 0}
-    - target: {fileID: 198159839986239166, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198159839986239166, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: randomSeed
-      value: -1957615212
-      objectReference: {fileID: 0}
-    - target: {fileID: 198585550801155088, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: startDelay.scalar
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 198585550801155088, guid: d39b5027be74e4c4c97ad17149ab1ee8,
-        type: 2}
-      propertyPath: randomSeed
-      value: -1268023949
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d39b5027be74e4c4c97ad17149ab1ee8, type: 2}
   m_IsPrefabParent: 0
@@ -945,6 +903,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
+  explosionObject: {fileID: 0}
 --- !u!23 &1704815337
 MeshRenderer:
   m_ObjectHideFlags: 0
