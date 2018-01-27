@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4188550612583234}
   - component: {fileID: 33101617791346888}
   - component: {fileID: 23258119046292534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Kurve_Schiene
   m_TagString: Untagged
   m_Icon: {fileID: 0}

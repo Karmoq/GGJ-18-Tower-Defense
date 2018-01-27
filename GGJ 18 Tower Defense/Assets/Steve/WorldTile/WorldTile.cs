@@ -139,6 +139,19 @@ public class WorldTile : MonoBehaviour {
         return transform.position;
     }
 
+
+    public static Vector2Int GetVector2IntFromRotation(Rotation rotation)
+    {
+        if (rotation == Rotation.North)
+            return Vector2Int.right;
+        else if (rotation == Rotation.East)
+            return Vector2Int.down;
+        else if (rotation == Rotation.South)
+            return Vector2Int.left;
+        else
+            return Vector2Int.up;
+    }
+
     public Vector2Int GetPosition() { return position; }
     public void SetPosition(Vector2Int t_pos) { position = t_pos; }
 
@@ -155,5 +168,5 @@ public class WorldTile : MonoBehaviour {
 
     public enum Rotation { North, East, South, West }
 
-    public enum Type { Straight, Curve, T }
+    public enum Type { Straight, Curve, T1, T2, Clean, Start }
 }

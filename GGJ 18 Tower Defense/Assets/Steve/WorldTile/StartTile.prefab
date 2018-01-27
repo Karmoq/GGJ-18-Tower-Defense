@@ -13,14 +13,14 @@ Prefab:
   m_IsPrefabParent: 1
 --- !u!1 &1006566094146546
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4476543091157818}
   - component: {fileID: 95554691061646796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Schiene_Gerade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4578507960889130}
   - component: {fileID: 33572833478646256}
   - component: {fileID: 23498715497963236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube42
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4394707928659150}
   - component: {fileID: 33081690536827754}
   - component: {fileID: 23140213210029178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube46
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,40 +71,23 @@ GameObject:
   - component: {fileID: 4912372383282436}
   - component: {fileID: 33476909349139924}
   - component: {fileID: 23524997038678674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1137014998051270
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4886765708771986}
-  - component: {fileID: 33879239751851838}
-  - component: {fileID: 23256880017850818}
-  m_Layer: 0
-  m_Name: Tile_15
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1347042195108170
+--- !u!1 &1068158116617760
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4969245854372366}
-  m_Layer: 0
-  m_Name: Tlile_1
+  - component: {fileID: 4363243934036546}
+  m_Layer: 8
+  m_Name: Models
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +104,7 @@ GameObject:
   - component: {fileID: 114775924778864162}
   - component: {fileID: 114573327387409908}
   - component: {fileID: 65193568668434066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StartTile
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -138,7 +121,7 @@ GameObject:
   - component: {fileID: 4090147771211344}
   - component: {fileID: 33956713541806870}
   - component: {fileID: 23017789041173486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +138,7 @@ GameObject:
   - component: {fileID: 4167127021503518}
   - component: {fileID: 33111809764306182}
   - component: {fileID: 23229266789554398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube44
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +155,7 @@ GameObject:
   - component: {fileID: 4611362179184820}
   - component: {fileID: 33539286040030642}
   - component: {fileID: 23262662653399638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube40
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +172,7 @@ GameObject:
   - component: {fileID: 4847734002293560}
   - component: {fileID: 33449653744188078}
   - component: {fileID: 23153488640980268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube41
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +189,7 @@ GameObject:
   - component: {fileID: 4492257214994772}
   - component: {fileID: 33982272154724668}
   - component: {fileID: 23265281614530032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube43
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,6 +222,20 @@ Transform:
   m_Father: {fileID: 4476543091157818}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4363243934036546
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1068158116617760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4476543091157818}
+  m_Father: {fileID: 4656529933502100}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4394707928659150
 Transform:
   m_ObjectHideFlags: 1
@@ -270,7 +267,7 @@ Transform:
   - {fileID: 4912372383282436}
   - {fileID: 4394707928659150}
   - {fileID: 4090147771211344}
-  m_Father: {fileID: 4656529933502100}
+  m_Father: {fileID: 4363243934036546}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4492257214994772
@@ -319,11 +316,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450575269799162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4476543091157818}
-  - {fileID: 4969245854372366}
+  - {fileID: 4363243934036546}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -340,19 +336,6 @@ Transform:
   m_Father: {fileID: 4476543091157818}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4886765708771986
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1137014998051270}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4969245854372366}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4912372383282436
 Transform:
   m_ObjectHideFlags: 1
@@ -365,20 +348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4476543091157818}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4969245854372366
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1347042195108170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4886765708771986}
-  m_Father: {fileID: 4656529933502100}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23017789041173486
 MeshRenderer:
@@ -497,40 +466,6 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100002, guid: b7f84c9541cdcf74dbd76acf2d314afb, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!23 &23256880017850818
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1137014998051270}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 2100000, guid: a60093466cd0bc64c9b0f54bed3f6c1f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -728,13 +663,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1016169623366972}
   m_Mesh: {fileID: 4300002, guid: b7f84c9541cdcf74dbd76acf2d314afb, type: 3}
---- !u!33 &33879239751851838
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1137014998051270}
-  m_Mesh: {fileID: 4300000, guid: a60093466cd0bc64c9b0f54bed3f6c1f, type: 3}
 --- !u!33 &33956713541806870
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -812,8 +740,6 @@ MonoBehaviour:
   EastTile: {fileID: 0}
   SouthTile: {fileID: 0}
   WestTile: {fileID: 0}
-  l_models:
-  - {fileID: 4476543091157818}
-  - {fileID: 4969245854372366}
+  models: {fileID: 4363243934036546}
   selected: 0
   locked: 0

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33568742548267170}
   - component: {fileID: 23198035595535362}
   - component: {fileID: 95685832445162856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gerade_Schiene
   m_TagString: Untagged
   m_Icon: {fileID: 0}

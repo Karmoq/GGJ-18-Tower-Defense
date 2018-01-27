@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33182538383458432}
   - component: {fileID: 23644006076246720}
   - component: {fileID: 95702554756982954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Kurve_m_Weiche
   m_TagString: Untagged
   m_Icon: {fileID: 0}

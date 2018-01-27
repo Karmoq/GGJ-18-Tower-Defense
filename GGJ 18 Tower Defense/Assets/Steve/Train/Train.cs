@@ -9,8 +9,10 @@ public class Train : MonoBehaviour {
     [SerializeField] public float currentSpeed;
     [SerializeField] public List<TrainWagon> l_wagons = new List<TrainWagon>();
 
+    [SerializeField] private Animator c_animator;
+
     // Pathing stuff
-    [SerializeField] private WorldTile StartTile;
+    [SerializeField] public WorldTile StartTile;
     [SerializeField] private WorldTile currentTile;
     [SerializeField] private TilePath currentPath;
     [SerializeField] private Vector3[] currentPathPoints;
@@ -18,11 +20,22 @@ public class Train : MonoBehaviour {
 
     public Text DebugText;
 
-    public void Awake()
+    private void Awake()
     {
+        c_animator = GetComponentInChildren<Animator>();
+    }
+
+    public void Start()
+    {
+        StartTile.locked = true;
         currentTile = StartTile;
         currentPath = StartTile.GetComponent<TilePath>();
         currentPathPoints = currentPath.GetPath();
+        transform.position = currentPathPoints[0];
+        foreach(TrainWagon t_wagon in l_wagons)
+        {
+            t_wagon.transform.position = currentPathPoints[0];
+        }
         pointIndex = 0;
     }
 
@@ -49,7 +62,7 @@ public class Train : MonoBehaviour {
         else
         {
             WorldTile nextTile = currentTile.GetWorldTileByRotation(currentPath.EndPoint);
-            if (nextTile != null && !nextTile.selected)
+            if (nextTile != null && !nextTile.selected && !nextTile.locked)
             {
                 TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
                 if (nextPath != null)
@@ -67,9 +80,11 @@ public class Train : MonoBehaviour {
                 currentSpeed = 0;
             }
         }
+
+        c_animator.speed = currentSpeed*3;
     }
 
-
+   
 
     public enum State { Driving, WaitingForNextTile }
 }

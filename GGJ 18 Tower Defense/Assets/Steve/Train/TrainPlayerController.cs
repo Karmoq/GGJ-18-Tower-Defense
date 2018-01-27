@@ -4,21 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TrainPlayerController : MonoBehaviour {
+
+    // Tile Selection
     [SerializeField] private WorldTile selectedTile;
     [SerializeField] private bool moved = false;
     [SerializeField] private bool turned = false;
-    public Text DebugText;
+
+
+    // TrainSpawning
+    [SerializeField] private float nextTrainCooldown = 30;
+    [SerializeField] private float nextTrainTimer = 30;
+
+    [SerializeField] private GameObject TrainPrefab;
+    [SerializeField] private GameObject CoalWagonPrefab;
+    [SerializeField] private GameObject WagonPrefab;
 
     public void Start()
     {
-        selectedTile.transform.position += Vector3.up * 0.5f;
+        selectedTile = TileManager.singleton.StartTile.NorthTile;
+        selectedTile.selected = true;
+        selectedTile.goalPosition += Vector3.up * 0.5f;
+
+        SpawnTrain(5);
     }
 
     public void FixedUpdate()
     {
         float x = Input.GetAxis("Joystick1Axis1");
         float y = Input.GetAxis("Joystick1Axis2");
-        DebugText.text = "" + x + " - "+y;
         float threshhold = 0.2f;
         if (x > threshhold && y < -threshhold)
             Move(WorldTile.Rotation.North);
@@ -37,6 +50,41 @@ public class TrainPlayerController : MonoBehaviour {
             Turn(turn);
         else
             turned = false;
+
+        if(nextTrainTimer > 0)
+        {
+            nextTrainTimer -= Time.deltaTime;
+        } else
+        {
+            if (!TileManager.singleton.StartTile.locked)
+            {
+                SpawnTrain(5);
+                nextTrainTimer = nextTrainCooldown;
+            }
+        }
+
+    }
+
+    private void SpawnTrain(int wagons)
+    {
+        GameObject Train = Instantiate(TrainPrefab);
+        Train TrainController = Train.GetComponent<Train>();
+        TrainController.StartTile = TileManager.singleton.StartTile;
+
+        GameObject CoalWagon = Instantiate(CoalWagonPrefab);
+        TrainWagon CoalWagonController = CoalWagon.GetComponent<TrainWagon>();
+        CoalWagonController.train = TrainController;
+        CoalWagonController.offset = 1.2f;
+        TrainController.l_wagons.Add(CoalWagonController);
+
+        for (int x = 0; x < wagons; x++)
+        {
+            GameObject newWagon = Instantiate(WagonPrefab);
+            TrainWagon WagonController = newWagon.GetComponent<TrainWagon>();
+            WagonController.train = TrainController;
+            WagonController.offset = x + 2;
+            TrainController.l_wagons.Add(WagonController);
+        }
     }
 
     private void Move(WorldTile.Rotation rotation)
@@ -83,4 +131,6 @@ public class TrainPlayerController : MonoBehaviour {
             turned = true;
         }
     }
+
+    
 }
