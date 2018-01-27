@@ -46,9 +46,9 @@ public class TrainHealth : MonoBehaviour {
         }
     }
 
-    public float GetCurrentHealth()
+    public float GetCurrentHealthPercentage()
     {
-        return currentHealth;
+        return currentHealth/MaxHealth;
     }
 
 }
