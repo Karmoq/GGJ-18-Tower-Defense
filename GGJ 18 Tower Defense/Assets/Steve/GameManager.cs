@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     public void Awake()
     {
         singleton = this;
+        Time.timeScale = 1;
     }
 
 	// Update is called once per frame
@@ -41,6 +42,6 @@ public class GameManager : MonoBehaviour {
 
     public void Restart()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
