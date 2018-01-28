@@ -12,6 +12,16 @@ public class TrainWagon : MonoBehaviour {
 
     public LayerMask tileMask;
 
+    [SerializeField]
+    private RagdollInitForce[] cows;
+    [SerializeField]
+    private AudioController ac;
+
+    public void Start()
+    {
+
+    }
+
     public void Update()
     {
         transform.position = train.GetPathPositionByOffset(offsetDistance);
@@ -39,12 +49,21 @@ public class TrainWagon : MonoBehaviour {
                 currentTile.locked = false;
             currentTile = null;
         }
+
+        if (ac != null && Random.Range(0,5000) < 2)
+            ac.Play();
     }
 
     public void Destroy()
     {
         if (currentTile != null)
             currentTile.locked = false;
+        foreach(RagdollInitForce cow in cows)
+        {
+            cow.transform.SetParent(null);
+            cow.Activate();
+        }
+        ScreenShake.S.Shake(3);
         Destroy(gameObject);
     }
 }

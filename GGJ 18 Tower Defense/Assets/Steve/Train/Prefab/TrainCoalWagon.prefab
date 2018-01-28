@@ -369,9 +369,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   train: {fileID: 0}
-  TrainPath: []
-  offset: 1.2
+  offsetDistance: 0
   currentTile: {fileID: 0}
   tileMask:
     serializedVersion: 2
     m_Bits: 256
+  cows: []

@@ -48,12 +48,12 @@ public class AirShipPlayerController : MonoBehaviour {
     {
         WindStrength = windStrength;
 
-        float xIn = Input.GetAxis("Joystick2Axis1") * moveSpeed;
-        float yIn = Input.GetAxis("Joystick2Axis2") * moveSpeed;
+        float xIn = Input.GetAxis("Joystick1Axis1") * moveSpeed;
+        float yIn = Input.GetAxis("Joystick1Axis2") * moveSpeed;
 
         movement = Quaternion.Euler(0, 45, 0) * new Vector3(xIn, 0, -yIn);
 
-        if(Input.GetKeyDown(KeyCode.Joystick2Button0) || Input.GetAxis("Joystick2Axis3") != 0)
+        if(Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetAxis("Joystick1Axis3") != 0)
         {
             if (currentTowerNumber > 0 && !placedTower)
             {
@@ -70,8 +70,8 @@ public class AirShipPlayerController : MonoBehaviour {
             placedTower = false;
         }
 
-        float xIn2 = Input.GetAxis("Joystick2Axis4") * moveSpeed;
-        float yIn2 = Input.GetAxis("Joystick2Axis5") * moveSpeed;
+        float xIn2 = Input.GetAxis("Joystick1Axis4") * moveSpeed;
+        float yIn2 = Input.GetAxis("Joystick1Axis5") * moveSpeed;
 
         WindDirection = Quaternion.Euler(0, 45, 0) * new Vector3(xIn2, 0, -yIn2);
     }

@@ -14,6 +14,7 @@ public class CameraControl : MonoBehaviour {
 
         transform.position = Vector3.up * orthoSize *0.75f;//new Vector3(-orthoSize/2, 10, -orthoSize/2);
         c_camera.orthographicSize = orthoSize*0.55f;
+        transform.position -= transform.forward * 30;
     }
 
     public void Update()
