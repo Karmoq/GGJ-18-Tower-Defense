@@ -110,9 +110,6 @@ public class TrainPlayerController : MonoBehaviour {
             Turn(turn);
         else
             turned = false;
-
-
-
     }
 
     public void GetMouseInput()

@@ -22,6 +22,8 @@ public class WorldTile : MonoBehaviour {
     public bool selected = false;
     public bool locked = false;
 
+    public Type type;
+
     public void Awake()
     {
         foreach(TilePath t_path in GetComponents<TilePath>())
@@ -38,13 +40,15 @@ public class WorldTile : MonoBehaviour {
         WestTile = TileManager.singleton.GetTileFromPosition(position.x, position.y + 1);
 
         goalPosition = transform.position;
+        models.transform.position = transform.position + Vector3.up * (position.x + position.y) + Vector3.up * 10;
     }
 
     public void Update()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation), 0.25f);
-        
-        models.transform.position = Vector3.Lerp(models.transform.position, goalPosition, 0.25f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation),5* Time.deltaTime);
+
+        models.transform.position = Vector3.MoveTowards(models.transform.position, goalPosition, 20 * Time.deltaTime);
+            //Vector3.Lerp(models.transform.position, goalPosition, 3* Time.deltaTime);
     }
 
     public void TurnRight()
@@ -181,5 +185,5 @@ public class WorldTile : MonoBehaviour {
 
     public enum Rotation { North, East, South, West }
 
-    public enum Type { Straight, Curve, T1, T2, Clean, Start }
+    public enum Type { Straight, Curve, T1, T2, Clean, Start, End }
 }

@@ -114,6 +114,77 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21707449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 21707452}
+  - component: {fileID: 21707451}
+  - component: {fileID: 21707450}
+  m_Layer: 0
+  m_Name: Floor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &21707450
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 21707449}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &21707451
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 21707449}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &21707452
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 21707449}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &216514199
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +1009,7 @@ GameObject:
   - component: {fileID: 1958108854}
   - component: {fileID: 1958108853}
   - component: {fileID: 1958108855}
+  - component: {fileID: 1958108856}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -957,7 +1029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileSize: {x: 1, y: 1, z: 1}
-  PathIncrements: 20
+  PathIncrements: 50
   l_prefabs:
   - {fileID: 1410222631982614, guid: 5354ee7585cf175459609968df70e902, type: 2}
   - {fileID: 1410222631982614, guid: 641f31cd0508daf4b849a2ea469dd35b, type: 2}
@@ -965,6 +1037,7 @@ MonoBehaviour:
   - {fileID: 1236405901451140, guid: 74ef21d74d9c4404eb7120ad10f6d3d2, type: 2}
   - {fileID: 1099733089538992, guid: 38dc0a1f19a2573468f18dcab8779914, type: 2}
   - {fileID: 1450575269799162, guid: 41c9e6942f5b41840b03daee58f547db, type: 2}
+  - {fileID: 1350883454562192, guid: e22baf1acc0b86742ad2f285e48c1246, type: 2}
   l_groundPrefabs:
   - {fileID: 100000, guid: c8315f4bc544ef14d8a58f3e51dcfe92, type: 3}
   - {fileID: 100000, guid: fe3da87528be9134c81197d35e8e2db5, type: 3}
@@ -972,7 +1045,10 @@ MonoBehaviour:
   - {fileID: 100000, guid: d8832bdf391df7a41b32702baf0c27e0, type: 3}
   - {fileID: 100000, guid: 9b0a1130f034a70458d75ef9bf324d84, type: 3}
   - {fileID: 100000, guid: 60feb6ee9b01c254192e19b2e75d5a51, type: 3}
-  l_randomPrefabs: []
+  l_randomCleanGroundTiles:
+  - {fileID: 1080093519069716, guid: 659fca29b86bc004580141c7fab4059a, type: 2}
+  - {fileID: 1588761252838186, guid: 15d809d9a08088341adb1ea4a5d19b08, type: 2}
+  - {fileID: 1523372635522120, guid: 0d6aa594927a93a4b8387fa77de13637, type: 2}
   StartTile: {fileID: 0}
   StraightAmount: 5
   CurveAmount: 5
@@ -1044,3 +1120,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   Menu: {fileID: 854807683}
+--- !u!114 &1958108856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1958108850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a095fc4520d1474bbf09a8937ea92e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TemplePrefab: {fileID: 1638430267108782, guid: 86348dfec38577c4384214fa7e2562cc,
+    type: 2}
+  SlaughterHousePrefab: {fileID: 1335038224181094, guid: 1172413dff145664f9ccf90c386fc829,
+    type: 2}
+  CanyonPrefabs:
+  - {fileID: 1534481065190460, guid: 40177616ec4c3e049ae0af2bf0b9c9e7, type: 2}
+  - {fileID: 1534481065190460, guid: 381ce232b8380874f829d185b094bcbd, type: 2}

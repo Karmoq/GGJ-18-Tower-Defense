@@ -1371,14 +1371,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSpeed: 3
   currentSpeed: 0
-  acceleration: 1
+  acceleration: 0.2
   l_wagons: []
   c_animator: {fileID: 0}
   StartTile: {fileID: 0}
   currentTile: {fileID: 0}
   currentPath: {fileID: 0}
   currentPathPoints: []
+  hasReachedEndOfPath: 0
   pointIndex: 0
+  currentPathIndex: 0
   distanceToNextPoint: 0
   pathForWagons: []
   DebugText: {fileID: 0}

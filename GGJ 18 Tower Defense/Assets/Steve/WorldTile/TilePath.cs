@@ -23,7 +23,7 @@ public class TilePath : MonoBehaviour
             }
         } else // if the path is a curve
         {
-            for (float i = 0; i < 90; i += (1f/20) * 90f)
+            for (float i = 0; i < 90; i += (1f/TileManager.singleton.PathIncrements) * 90f)
             {
                 float x = Mathf.Sin(i * Mathf.Deg2Rad) * 0.5f;
                 float y = Mathf.Cos(i * Mathf.Deg2Rad) * 0.5f;

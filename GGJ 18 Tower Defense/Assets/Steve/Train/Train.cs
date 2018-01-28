@@ -21,7 +21,7 @@ public class Train : MonoBehaviour {
     [SerializeField] private TilePath currentPath;
     [SerializeField] private List<Vector3> currentPathPoints = new List<Vector3>();
 
-    [SerializeField] private bool hasReachedEndOfPath = true;
+    [SerializeField] private bool hasReachedEndOfPath = false;
 
     [SerializeField] private int pointIndex = 0;
     [SerializeField] private int currentPathIndex = 0;
@@ -55,67 +55,69 @@ public class Train : MonoBehaviour {
 
     public virtual void Update()
     {
-
-        //if (!hasReachedEndOfPath)
-        //{
-        //    currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
-        //    transform.position = GetPathPositionBySpeed(currentSpeed * Time.deltaTime);
-        //}
-        //else
-        //{
-        //    WorldTile nextTile = currentTile.GetWorldTileByRotation(currentPath.EndPoint);
-        //    if (nextTile != null && !nextTile.selected && !nextTile.locked)
-        //    {
-        //        TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
-        //        if (nextPath != null)
-        //        {
-        //            currentTile.locked = false;
-        //            currentTile = nextTile;
-        //            currentPath = nextPath;
-        //            currentPathPoints = nextPath.GetPath();
-        //            pointIndex = 0;
-        //            currentTile.locked = true;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        currentSpeed = 0;
-        //    }
-        //}
-
-
-
+        float speedLeft = currentSpeed * Time.deltaTime;
         if(pointIndex < currentPathPoints.Count)
         {
-            distanceToNextPoint = Vector3.Distance(currentPathPoints[pointIndex], transform.position);
-            if (distanceToNextPoint > currentSpeed * Time.deltaTime) // move into the direction of the next point
+            Vector3 position = transform.position;
+            while (speedLeft > 0)
             {
-                Vector3 velocity = currentPathPoints[pointIndex] - transform.position;
-                currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
-                transform.position += Vector3.ClampMagnitude(velocity, currentSpeed * Time.deltaTime);
-                transform.rotation = Quaternion.LookRotation(currentPathPoints[pointIndex] - transform.position);
-            }
-            else
-            {// load the next point
-                pathForWagons.Add(currentPathPoints[pointIndex]);
+                if(pointIndex >= currentPathPoints.Count)
+                {
+                    break;
+                }
+                distanceToNextPoint = Vector3.Distance(currentPathPoints[pointIndex], transform.position);
+                position = currentPathPoints[pointIndex];
+                if(currentPathPoints[pointIndex] - transform.position != Vector3.zero)
+                    transform.rotation = Quaternion.LookRotation(currentPathPoints[pointIndex] - transform.position);
+                speedLeft -= distanceToNextPoint;
+                pathForWagons.Add(position);
                 pointIndex++;
             }
+            transform.position = position;
+
+            currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
         }
         else
         {
+            if(currentTile.type == WorldTile.Type.End)
+            {
+
+            }
             WorldTile nextTile = currentTile.GetWorldTileByRotation(currentPath.EndPoint);
+            if(nextTile == null)
+            {
+                foreach(TrainWagon t_wagon in l_wagons)
+                {
+                    t_wagon.Destroy();
+                }
+                trainHealth.TakeDamage(999);
+            }
             if (nextTile != null && !nextTile.selected && !nextTile.locked)
             {
+                if(nextTile.type == WorldTile.Type.Clean)
+                {
+                    foreach (TrainWagon t_wagon in l_wagons)
+                    {
+                        t_wagon.Destroy();
+                    }
+                    trainHealth.Die();
+                }
                 TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
                 if (nextPath != null)
-              {
-                  currentTile.locked = false;
-                  currentTile = nextTile;
-                  currentPath = nextPath;
-                  currentPathPoints = nextPath.GetPath();
-                  pointIndex = 0;
-                  currentTile.locked = true;
-              }
+                {
+                    currentTile.locked = false;
+                    currentTile = nextTile;
+                    currentPath = nextPath;
+                    currentPathPoints = nextPath.GetPath();
+                    pointIndex = 0;
+                    currentTile.locked = true;
+
+                    currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
+                }
+                else
+                {
+                    currentSpeed = 0;
+                }
             }
             else
             {
@@ -155,6 +157,7 @@ public class Train : MonoBehaviour {
             if(currentPathIndex >= currentPathPoints.Count)
             {
                 hasReachedEndOfPath = true;
+                Debug.Log("Reached End Of Path");
                 return currentPathPoints[currentPathPoints.Count-1];
             }
             thisPoint = currentPathPoints[currentPathIndex++];

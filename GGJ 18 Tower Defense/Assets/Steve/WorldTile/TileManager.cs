@@ -13,7 +13,7 @@ public class TileManager : MonoBehaviour {
     //random tiles
     [SerializeField] private List<GameObject> l_prefabs = new List<GameObject>();
     [SerializeField] private List<GameObject> l_groundPrefabs = new List<GameObject>();
-    [SerializeField] private List<GameObject> l_randomPrefabs = new List<GameObject>();
+    [SerializeField] private List<GameObject> l_randomCleanGroundTiles = new List<GameObject>();
     [SerializeField] public WorldTile StartTile;
 
     public float StraightAmount;
@@ -65,7 +65,6 @@ public class TileManager : MonoBehaviour {
         else
             tileType = WorldTile.Type.Clean;
         
-
         return CreateTileOfType(x, y, tileType, true);
     }
 
@@ -78,7 +77,16 @@ public class TileManager : MonoBehaviour {
         WorldTile newTileScript = newTile.GetComponent<WorldTile>();
         newTileScript.SetPosition(new Vector2Int(x, y));
 
-        GameObject groundTile = Instantiate(l_groundPrefabs[Random.Range(0, l_groundPrefabs.Count)]);
+        GameObject groundTile;
+        groundTile = Instantiate(l_groundPrefabs[Random.Range(0, l_groundPrefabs.Count)]);
+
+        if (type == WorldTile.Type.Clean)
+        {
+            GameObject cleanTileAdditional = Instantiate(l_randomCleanGroundTiles[Random.Range(0, l_randomCleanGroundTiles.Count)]);
+            cleanTileAdditional.transform.position += Vector3.down * 0.05f;
+            cleanTileAdditional.transform.SetParent(newTileScript.models);
+        }
+
         groundTile.transform.position += Vector3.down * 0.05f;
         groundTile.transform.SetParent(newTileScript.models);
 
@@ -89,6 +97,7 @@ public class TileManager : MonoBehaviour {
         newTile.transform.localScale = TileSize;
         newTile.name += " = " + x + " - " + y;
 
+        newTileScript.type = type;
         return newTileScript;
     }
 
@@ -167,6 +176,10 @@ public class TileManager : MonoBehaviour {
                 currentPosition += WorldTile.GetVector2IntFromRotation(currentRotation);
             }
         }
+
+        WorldTile endTile = CreateTileOfType(EndPosition.x, EndPosition.y, WorldTile.Type.End, false);
+        l_worldTiles[endTile.GetPosition().x, endTile.GetPosition().y] = endTile;
+        l_worldTiles[EndPosition.x-1, EndPosition.y].NorthTile = endTile;
         return l_worldTiles;
     }
 
