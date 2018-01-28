@@ -139,7 +139,6 @@ public class WorldTile : MonoBehaviour {
         return transform.position;
     }
 
-
     public static Vector2Int GetVector2IntFromRotation(Rotation rotation)
     {
         if (rotation == Rotation.North)

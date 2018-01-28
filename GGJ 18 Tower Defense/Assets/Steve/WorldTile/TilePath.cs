@@ -9,7 +9,7 @@ public class TilePath : MonoBehaviour
     public WorldTile.Rotation StartPoint;
     public WorldTile.Rotation EndPoint;
 
-    public Vector3[] GetPath()
+    public List<Vector3> GetPath()
     {
         Vector3 startPosition = tile.GetPositionOfDirection(StartPoint);
         Vector3 endPosition = tile.GetPositionOfDirection(EndPoint);
@@ -50,10 +50,6 @@ public class TilePath : MonoBehaviour
                 pathPoints.Add(new Vector3(point.x, startPosition.y, point.y)+transform.position);
             }
         }
-        return pathPoints.ToArray();
-    }
-    public void OnDrawGizmosSelected()
-    {
-        
+        return pathPoints;
     }
 }
