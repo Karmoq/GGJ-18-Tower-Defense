@@ -4,10 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
-
+    public static GameManager singleton;
     public bool paused = false;
     [SerializeField] private GameObject Menu;
 	
+    public void Awake()
+    {
+        singleton = this;
+    }
+
 	// Update is called once per frame
 	void Update () {
 

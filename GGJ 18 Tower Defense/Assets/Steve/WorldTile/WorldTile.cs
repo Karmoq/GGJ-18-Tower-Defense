@@ -21,6 +21,7 @@ public class WorldTile : MonoBehaviour {
     [SerializeField] public Transform models;
     public bool selected = false;
     public bool locked = false;
+    public TrainWagon lockedBy = null;
 
     public Type type;
 
@@ -45,6 +46,12 @@ public class WorldTile : MonoBehaviour {
 
     public void Update()
     {
+        if (selected)
+        {
+            goalPosition = transform.position + Vector3.up * 0.5f;
+        } else
+        { goalPosition = transform.position; }
+
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(goalRotation),5* Time.deltaTime);
 
         models.transform.position = Vector3.MoveTowards(models.transform.position, goalPosition, 20 * Time.deltaTime);

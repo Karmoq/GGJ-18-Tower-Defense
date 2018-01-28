@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TrainPlayerController : MonoBehaviour {
-
+    public static TrainPlayerController singleton;
     // Tile Selection
     [SerializeField] private WorldTile selectedTile;
     [SerializeField] private bool moved = false;
@@ -23,6 +23,14 @@ public class TrainPlayerController : MonoBehaviour {
     [SerializeField] private GameObject WagonPrefab;
     public int wagons;
 
+
+    public int points = 0;
+
+    public void Awake()
+    {
+        singleton = this;
+    }
+
     public void Start()
     {
         selectedTile = TileManager.singleton.StartTile.NorthTile;
@@ -35,7 +43,12 @@ public class TrainPlayerController : MonoBehaviour {
 
     public void Update()
     {
-        if(Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        if(points >= 10)
+        {
+            GameManager.singleton.Pause(true);
+        }
+
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
         {
             ControllerInput = false;
         }
@@ -45,7 +58,6 @@ public class TrainPlayerController : MonoBehaviour {
             if(selectedTile == null)
             {
                 selectedTile = TileManager.singleton.StartTile.NorthTile;
-                selectedTile.goalPosition += Vector3.up * 0.5f;
             }
         }
 
@@ -124,10 +136,8 @@ public class TrainPlayerController : MonoBehaviour {
                 if (selectedTile != null)
                 {
                     selectedTile.selected = false;
-                    selectedTile.ResetGoalPosition();
                 }
                 selectedTile = hoverTile;
-                selectedTile.goalPosition += Vector3.up * 0.5f;
                 selectedTile.selected = true;
             }
 
@@ -139,7 +149,6 @@ public class TrainPlayerController : MonoBehaviour {
             if (selectedTile != null)
             {
                 selectedTile.selected = false;
-                selectedTile.ResetGoalPosition();
             }
             selectedTile = null;
         }

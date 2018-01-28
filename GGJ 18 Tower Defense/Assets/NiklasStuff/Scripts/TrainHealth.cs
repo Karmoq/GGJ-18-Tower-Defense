@@ -32,7 +32,6 @@ public class TrainHealth : MonoBehaviour {
         {
             Instantiate(explosionObject, transform.position, explosionObject.transform.rotation);
         }
-        TrainManager.S.RemoveTarget(transform);
         ScreenShake.S.Shake(10);
         Destroy(gameObject);
     }
@@ -45,6 +44,11 @@ public class TrainHealth : MonoBehaviour {
             TakeDamage(bullet.damage);
             Destroy(col.gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        TrainManager.S.RemoveTarget(transform);
     }
 
     public float GetCurrentHealthPercentage()

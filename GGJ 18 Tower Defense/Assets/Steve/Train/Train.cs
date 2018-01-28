@@ -15,6 +15,9 @@ public class Train : MonoBehaviour {
     [SerializeField] private Animator c_animator;
     private TrainHealth trainHealth;
 
+
+    [SerializeField] private GameObject ac;
+
     // Pathing stuff
     [SerializeField] public WorldTile StartTile;
     [SerializeField] private WorldTile currentTile;
@@ -81,43 +84,65 @@ public class Train : MonoBehaviour {
         {
             if(currentTile.type == WorldTile.Type.End)
             {
-
+                if(l_wagons.Count > 1)
+                {
+                    TrainPlayerController.singleton.points += l_wagons.Count - 1;
+                    foreach (TrainWagon t_wagon in l_wagons)
+                    {
+                        Destroy(t_wagon.gameObject);
+                    }
+                    Destroy(this.gameObject);
+                    Instantiate(ac);
+                    return;
+                } else
+                {
+                    DestroyTrain();
+                }
             }
             WorldTile nextTile = currentTile.GetWorldTileByRotation(currentPath.EndPoint);
             if(nextTile == null)
             {
-                foreach(TrainWagon t_wagon in l_wagons)
-                {
-                    t_wagon.Destroy();
-                }
-                trainHealth.TakeDamage(999);
+                DestroyTrain();
             }
-            if (nextTile != null && !nextTile.selected && !nextTile.locked)
+            if (nextTile != null)
             {
-                if(nextTile.type == WorldTile.Type.Clean)
+                if (nextTile.locked)
                 {
-                    foreach (TrainWagon t_wagon in l_wagons)
+                    if (l_wagons.Contains(nextTile.lockedBy))
                     {
-                        t_wagon.Destroy();
+                        DestroyTrain();
                     }
-                    trainHealth.Die();
                 }
-                TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
-                if (nextPath != null)
+                if(!nextTile.selected && !nextTile.locked)
                 {
-                    currentTile.locked = false;
-                    currentTile = nextTile;
-                    currentPath = nextPath;
-                    currentPathPoints = nextPath.GetPath();
-                    pointIndex = 0;
-                    currentTile.locked = true;
+                    if (nextTile.type == WorldTile.Type.Clean)
+                    {
+                        foreach (TrainWagon t_wagon in l_wagons)
+                        {
+                            t_wagon.Destroy();
+                        }
+                        trainHealth.Die();
+                    }
+                    TilePath nextPath = nextTile.GetTilePathByEntryPoint(WorldTile.TurnBy(currentPath.EndPoint, 2));
+                    if(nextTile.type == WorldTile.Type.End && nextPath == null)
+                    {
+                        DestroyTrain();
+                    }
+                    if (nextPath != null)
+                    {
+                        currentTile.locked = false;
+                        currentTile = nextTile;
+                        currentPath = nextPath;
+                        currentPathPoints = nextPath.GetPath();
+                        pointIndex = 0;
+                        currentTile.locked = true;
 
-                    currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
-                }
-                else
-                {
-                    currentSpeed = 0;
-                }
+                        currentSpeed = Mathf.Clamp(currentSpeed + acceleration * Time.deltaTime, 0, targetSpeed);
+                    }
+                    else
+                    {
+                        currentSpeed = 0;
+                    } }
             }
             else
             {
@@ -126,6 +151,16 @@ public class Train : MonoBehaviour {
         }
 
         c_animator.speed = currentSpeed*3;
+    }
+
+    public void DestroyTrain()
+    {
+        foreach (TrainWagon t_wagon in l_wagons)
+        {
+            t_wagon.Destroy();
+        }
+        trainHealth.TakeDamage(999);
+
     }
 
     public void FixedUpdate()
@@ -187,6 +222,4 @@ public class Train : MonoBehaviour {
         }
         return pathForWagons[pathIndex];
     }
-
-    public enum State { Driving, WaitingForNextTile }
 }

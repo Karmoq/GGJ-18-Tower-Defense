@@ -17,11 +17,6 @@ public class TrainWagon : MonoBehaviour {
     [SerializeField]
     private AudioController ac;
 
-    public void Start()
-    {
-
-    }
-
     public void Update()
     {
         transform.position = train.GetPathPositionByOffset(offsetDistance);
@@ -42,11 +37,15 @@ public class TrainWagon : MonoBehaviour {
             }
             currentTile = hitInfo.collider.GetComponent<WorldTile>();
             currentTile.locked = true;
+            currentTile.lockedBy = this;
         }
         else // if the wagon left the tile
         {
-            if(currentTile != null)
+            if (currentTile != null)
+            {
                 currentTile.locked = false;
+                currentTile.lockedBy = null;
+            }
             currentTile = null;
         }
 
@@ -57,7 +56,10 @@ public class TrainWagon : MonoBehaviour {
     public void Destroy()
     {
         if (currentTile != null)
+        {
             currentTile.locked = false;
+            currentTile.lockedBy = null;
+        }
         foreach(RagdollInitForce cow in cows)
         {
             cow.transform.SetParent(null);
@@ -65,5 +67,14 @@ public class TrainWagon : MonoBehaviour {
         }
         ScreenShake.S.Shake(3);
         Destroy(gameObject);
+    }
+
+    public void OnDestroy()
+    {
+        if(currentTile != null)
+        {
+            currentTile.locked = false;
+            currentTile.lockedBy = null;
+        }
     }
 }

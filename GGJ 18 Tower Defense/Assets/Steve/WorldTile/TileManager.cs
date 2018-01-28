@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TileManager : MonoBehaviour {
     public static TileManager singleton;
     
@@ -209,8 +208,11 @@ public class TileManager : MonoBehaviour {
         return false;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
-        
+        foreach (WorldTile tile in l_worldTiles)
+        {
+            tile.selected = false;
+        }
     }
 }
